@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pristine Mutual — insurance for independent workshops</title>
+<meta name="description" content="Pristine Mutual insures machine shops, bakeries, and trades on the road. Mutual since 1974.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C19;
+    --pine:#1E3A33;
+    --moss:#5B7168;
+    --paper:#E7E5DD;
+    --chalk:#F7F6F2;
+    --signal:#F0B429;
+    --stamp:#A03D2E;
+    --rule:rgba(19,28,25,.16);
+    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --body:"Newsreader",Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.55;
+    font-weight:400;
+  }
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:.98;margin:0}
+  p{margin:0 0 1em}
+  .wrap{width:min(1180px,92vw);margin:0 auto}
+  .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase}
+  :focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+
+  /* ---------- header ---------- */
+  .top{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--rule)}
+  .top .wrap{display:flex;align-items:center;gap:2rem;height:66px}
+  .mark{font-family:var(--display);font-weight:800;font-size:1.05rem;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+  .mark span{color:var(--moss);font-weight:600}
+  .nav{margin-left:auto;display:flex;align-items:center;gap:1.75rem}
+  .nav a{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.4rem 0;border-bottom:1px solid transparent}
+  .nav a:hover{border-bottom-color:var(--ink)}
+  .nav .tel{color:var(--pine)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:5.5rem 0 4rem}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:5rem;align-items:start}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:1.6rem}
+  .eyebrow b{color:var(--ink);font-weight:500}
+  h1{font-size:clamp(2.9rem,6vw,4.6rem)}
+  h1 em{font-style:normal;color:var(--pine);display:block}
+  .lede{font-size:1.22rem;max-width:34ch;margin-top:1.9rem;color:#28352F}
+  .actions{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:2.4rem}
+  .btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.95rem 1.5rem;border:1px solid var(--ink);display:inline-block}
+  .btn-fill{background:var(--ink);color:var(--chalk)}
+  .btn-fill:hover{background:var(--pine)}
+  .btn-line:hover{background:var(--ink);color:var(--chalk)}
+
+  /* ---------- policy schedule (signature) ---------- */
+  .schedule{
+    background:var(--chalk);
+    color:var(--ink);
+    padding:2.1rem 2rem 2.4rem;
+    position:relative;
+    box-shadow:0 1px 0 var(--rule), 0 18px 40px -28px rgba(19,28,25,.55);
+  }
+  .schedule::before,.schedule::after{
+    content:"";position:absolute;left:0;right:0;height:9px;
+    background:radial-gradient(circle at 5px 0, transparent 4.5px, var(--chalk) 5px) repeat-x;
+    background-size:10px 9px;
+  }
+  .schedule::before{top:-9px;transform:scaleY(-1)}
+  .schedule::after{bottom:-9px}
+  .sch-head{display:flex;justify-content:space-between;gap:1rem;border-bottom:2px solid var(--ink);padding-bottom:.7rem}
+  .sch-head .mono{font-size:.65rem}
+  .row{
+    display:grid;grid-template-columns:1fr auto;gap:1rem;
+    font-family:var(--mono);font-size:.78rem;
+    padding:.42rem 0;border-bottom:1px dotted rgba(19,28,25,.28);
+    opacity:0;animation:fill .28s ease forwards;
+  }
+  .row b{font-weight:500}
+  .row .k{color:#3A4B44}
+  .row .v{text-align:right;white-space:nowrap}
+  .row.head{border-bottom:none;padding-top:1.1rem;color:var(--moss);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+  .row.total{border-bottom:none;border-top:2px solid var(--ink);margin-top:.9rem;padding-top:.75rem;font-size:.86rem}
+  @keyframes fill{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .row:nth-child(1){animation-delay:.15s}
+  .row:nth-child(2){animation-delay:.26s}
+  .row:nth-child(3){animation-delay:.37s}
+  .row:nth-child(4){animation-delay:.48s}
+  .row:nth-child(5){animation-delay:.62s}
+  .row:nth-child(6){animation-delay:.73s}
+  .row:nth-child(7){animation-delay:.84s}
+  .row:nth-child(8){animation-delay:.95s}
+  .row:nth-child(9){animation-delay:1.06s}
+  .row:nth-child(10){animation-delay:1.17s}
+  .row:nth-child(11){animation-delay:1.28s}
+  .row:nth-child(12){animation-delay:1.45s}
+  .row:nth-child(13){animation-delay:1.56s}
+  .stamp{
+    position:absolute;right:1.4rem;bottom:1.1rem;
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+    color:var(--stamp);border:2px solid var(--stamp);padding:.35rem .6rem;
+    transform:rotate(-7deg);opacity:0;
+    animation:thud .35s cubic-bezier(.2,1.4,.4,1) 1.85s forwards;
+  }
+  @keyframes thud{from{opacity:0;transform:rotate(-7deg) scale(1.5)}to{opacity:.85;transform:rotate(-7deg) scale(1)}}
+  .caption{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;color:var(--moss);margin-top:1.9rem;text-align:right}
+
+  /* ---------- facts strip ---------- */
+  .facts{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:#DFDDD3}
+  .facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
+  .fact{background:#DFDDD3;padding:2rem 1.6rem}
+  .fact .n{font-family:var(--display);font-size:2.5rem;font-weight:800;letter-spacing:-.03em}
+  .fact .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin-top:.4rem}
+
+  /* ---------- coverage ---------- */
+  .band{padding:5.5rem 0}
+  .band-head{display:grid;grid-template-columns:1fr 1.15fr;gap:5rem;align-items:end;margin-bottom:3.5rem}
+  h2{font-size:clamp(2rem,3.6vw,2.9rem)}
+  .band-head p{margin:0;color:#33413A}
+  .trade{display:grid;grid-template-columns:1fr 1.15fr;gap:5rem;padding:2.2rem 0;border-top:1px solid var(--rule)}
+  .trade h3{font-size:1.5rem;font-weight:600}
+  .trade .who{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin-top:.6rem}
+  .lines{margin:0;padding:0;list-style:none;column-count:2;column-gap:2.5rem}
+  .lines li{font-family:var(--mono);font-size:.76rem;padding:.3rem 0;break-inside:avoid;color:#2A3831}
+  .lines li::before{content:"— ";color:var(--moss)}
+
+  /* ---------- claims ---------- */
+  .dark{background:var(--ink);color:var(--paper)}
+  .dark h2{color:var(--chalk)}
+  .dark .band-head p{color:#A9B8B0}
+  .claims{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+  .claim{border-top:1px solid rgba(231,229,221,.25);padding-top:1.4rem}
+  .claim .days{font-family:var(--display);font-size:3.4rem;font-weight:800;color:var(--signal);letter-spacing:-.04em;line-height:1}
+  .claim .days sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#A9B8B0;vertical-align:baseline;margin-left:.6rem}
+  .claim p{font-size:1rem;color:#D3DAD5;margin-top:1rem}
+  .claim .tag{font-family:var(--mono);font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;color:var(--moss)}
+
+  /* ---------- talk ---------- */
+  .talk .wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .talk h2{max-width:14ch}
+  .card{background:var(--chalk);border:1px solid var(--rule);padding:2.2rem}
+  .card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.9rem 1.6rem;align-items:baseline}
+  .card dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+  .card dd{margin:0;font-size:1.02rem}
+  .card dd small{display:block;font-family:var(--mono);font-size:.66rem;color:var(--moss);letter-spacing:.05em;text-transform:none;margin-top:.15rem}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--rule);padding:3rem 0 4rem;font-size:.85rem;color:#3A4B44}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem}
+  footer h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--moss);margin:0 0 .9rem;font-weight:400}
+  footer ul{list-style:none;margin:0;padding:0}
+  footer li{padding:.22rem 0}
+  footer a{text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .fineprint{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:.63rem;line-height:1.7;letter-spacing:.03em;color:var(--moss);max-width:75ch}
+
+  @media (max-width:900px){
+    body{font-size:18px}
+    .hero{padding:3rem 0 2.5rem}
+    .hero .wrap,.band-head,.trade,.talk .wrap,.foot-grid{grid-template-columns:1fr;gap:2.5rem}
+    .facts .wrap,.claims{grid-template-columns:1fr}
+    .claims{gap:2rem}
+    .nav a:not(.tel){display:none}
+    .lines{column-count:1}
+    .caption{text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .row,.stamp{animation:none;opacity:1;transform:none}
+    .stamp{opacity:.85;transform:rotate(-7deg)}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#">PRISTINE <span>MUTUAL</span></a>
+    <nav class="nav">
+      <a href="#coverage">Coverage</a>
+      <a href="#claims">Claims</a>
+      <a href="#talk">Talk to us</a>
+      <a class="tel" href="tel:+16145550148">614 555 0148</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Mutual since <b>1974</b> · Ohio Valley &amp; Great Lakes</div>
+      <h1>We insure the shops<em>that fix everything else.</em></h1>
+      <p class="lede">Machine shops, bakeries, upholsterers, electricians with a van and two apprentices. Businesses too small for a broker to bother returning calls about.</p>
+      <div class="actions">
+        <a class="btn btn-fill" href="#talk">Start a quote</a>
+        <a class="btn btn-line" href="#claims">See how we pay claims</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="schedule">
+        <div class="sch-head">
+          <span class="mono">Schedule of insurance</span>
+          <span class="mono">PM-4471-08</span>
+        </div>
+        <div class="row"><span class="k">Named insured</span><span class="v"><b>Pallant St. Machine Co.</b></span></div>
+        <div class="row"><span class="k">Trade</span><span class="v">Precision machining</span></div>
+        <div class="row"><span class="k">Headcount</span><span class="v">6</span></div>
+        <div class="row"><span class="k">Term</span><span class="v">01 AUG 26 – 01 AUG 27</span></div>
+        <div class="row head"><span>Coverage</span><span class="v">Limit</span></div>
+        <div class="row"><span class="k">General liability</span><span class="v">1,000,000 / occ</span></div>
+        <div class="row"><span class="k">Tools &amp; equipment</span><span class="v">85,000</span></div>
+        <div class="row"><span class="k">Tools in transit</span><span class="v">15,000</span></div>
+        <div class="row"><span class="k">Business interruption</span><span class="v">12 months</span></div>
+        <div class="row"><span class="k">Product liability</span><span class="v">1,000,000</span></div>
+        <div class="row"><span class="k">Premises, 3,400 sq ft</span><span class="v">Replacement cost</span></div>
+        <div class="row total"><span class="k"><b>Annual premium</b></span><span class="v"><b>4,318.00</b></span></div>
+        <div class="row total" style="border-top:none;margin-top:0;padding-top:.2rem"><span class="k">Deductible</span><span class="v">1,000.00</span></div>
+        <div class="stamp">BOUND</div>
+      </div>
+      <p class="caption">A real schedule, minus the name. Most of ours fit on one page.</p>
+    </div>
+  </div>
+</section>
+
+<section class="facts">
+  <div class="wrap">
+    <div class="fact"><div class="n">11 days</div><div class="t">Median time to pay a property claim, 2025</div></div>
+    <div class="fact"><div class="n">2,940</div><div class="t">Member businesses across six states</div></div>
+    <div class="fact"><div class="n">No brokers</div><div class="t">You talk to the person who writes the policy</div></div>
+  </div>
+</section>
+
+<section class="band" id="coverage">
+  <div class="wrap">
+    <div class="band-head">
+      <h2>What we actually cover</h2>
+      <p>Every insurer lists general liability. The difference is in the endorsements nobody thinks about until a Tuesday morning goes wrong. Here is what sits inside a standard Pristine policy for each trade, at no extra charge.</p>
+    </div>
+
+    <div class="trade">
+      <div>
+        <h3>Machine shops &amp; fabrication</h3>
+        <div class="who">CNC · manual · welding · sheet metal</div>
+      </div>
+      <ul class="lines">
+        <li>Coolant and hydraulic escape, including floor remediation</li>
+        <li>Work in progress at customer value, not scrap value</li>
+        <li>Spindle and controller breakdown</li>
+        <li>Chip fire and metal dust cleanup</li>
+        <li>Faulty workmanship recall, 250,000</li>
+        <li>Rented crane and hoist liability</li>
+      </ul>
+    </div>
+
+    <div class="trade">
+      <div>
+        <h3>Bakeries &amp; food production</h3>
+        <div class="who">Retail · wholesale · commissary kitchens</div>
+      </div>
+      <ul class="lines">
+        <li>Spoilage from utility interruption, 20,000</li>
+        <li>Oven and proofer breakdown, parts and labor</li>
+        <li>Contamination and product withdrawal</li>
+        <li>Loss of a single anchor account, 90 days</li>
+        <li>Delivery vehicle contents</li>
+        <li>Health department closure, per diem</li>
+      </ul>
+    </div>
+
+    <div class="trade">
+      <div>
+        <h3>Trades on the road</h3>
+        <div class="who">Electrical · plumbing · HVAC · low voltage</div>
+      </div>
+      <ul class="lines">
+        <li>Tools stolen from a locked van, no forced entry required</li>
+        <li>Damage to the part of the property you were working on</li>
+        <li>Apprentice injury, first dollar</li>
+        <li>Rekeying and lock replacement after a key loss</li>
+        <li>Additional insured, added same day</li>
+        <li>Permit bond errors</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band dark" id="claims">
+  <div class="wrap">
+    <div class="band-head">
+      <h2>Three claims from last year</h2>
+      <p>Names changed, numbers not. An adjuster who has stood in a shop like yours is on site within two business days, and every claim under 50,000 is decided by that same adjuster without a committee.</p>
+    </div>
+    <div class="claims">
+      <div class="claim">
+        <div class="days">9<sub>days to pay</sub></div>
+        <p>A coolant line split at two in the morning. By opening, 400 square feet of floor sat under an inch of fluid and the pallets under the bar stock had wicked it up the whole way. Adjuster Thursday, check the following Monday.</p>
+        <div class="tag">Machine shop · Dayton OH · 38,200</div>
+      </div>
+      <div class="claim">
+        <div class="days">4<sub>days to pay</sub></div>
+        <p>A delivery van reversed into the roll-up door and took the frame with it. Two mornings of production gone. We paid the door, the door installer's rush fee, and the wholesale orders they could not fill.</p>
+        <div class="tag">Bakery · Erie PA · 11,750</div>
+      </div>
+      <div class="claim">
+        <div class="days">21<sub>days to pay</sub></div>
+        <p>Foam dust in an extraction duct caught. The building survived, the stock and four sewing machines did not. Longer than we like: the fire marshal's report took eleven of those days. We advanced payroll on day three.</p>
+        <div class="tag">Upholstery · Kalamazoo MI · 164,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band talk" id="talk">
+  <div class="wrap">
+    <div>
+      <h2>Ask before you fill in anything.</h2>
+      <p>There is a chat window in the corner of this page. It goes to the same underwriting desk as the phone line, and you can ask it what a policy would cost for your shop without giving us a name first.</p>
+      <p class="mono" style="color:var(--moss)">Quotes take about eleven minutes.</p>
+    </div>
+    <div class="card">
+      <dl>
+        <dt>Chat</dt>
+        <dd>Bottom right of this page<small>Mon–Fri 7:00–19:00 ET, Sat 8:00–13:00</small></dd>
+        <dt>Phone</dt>
+        <dd><a href="tel:+16145550148">614 555 0148</a><small>Claims line answered 24 hours</small></dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:desk@pristinemutual.com">desk@pristinemutual.com</a><small>Replies same business day</small></dd>
+        <dt>Office</dt>
+        <dd>418 Pallant Street, Columbus OH<small>Walk in. Somebody is at the front.</small></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="mark" style="margin-bottom:.8rem">PRISTINE <span>MUTUAL</span></div>
+        <p style="max-width:38ch;margin:0">A mutual insurer owned by its policyholders. Founded in Columbus in 1974 by nine tool and die owners who could not get a straight quote.</p>
+      </div>
+      <div>
+        <h4>Coverage</h4>
+        <ul>
+          <li><a href="#coverage">Machine shops</a></li>
+          <li><a href="#coverage">Bakeries</a></li>
+          <li><a href="#coverage">Trades on the road</a></li>
+          <li><a href="#talk">Certificates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Members</h4>
+        <ul>
+          <li><a href="#claims">File a claim</a></li>
+          <li><a href="#talk">Pay a premium</a></li>
+          <li><a href="#talk">Add an insured</a></li>
+          <li><a href="#">Annual report</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fineprint">
+      Licensed in OH, MI, IN, KY, PA, WV. Coverage described here is a summary; the policy form and its endorsements govern. Limits shown are examples and not an offer of insurance.<br>
+      Demo site. Pristine Mutual is not a real company and none of these numbers, claims, or people exist.
+    </p>
+  </div>
+</footer>
+
+<!-- Start of LiveAgent integration script: Chat button: Rolling circle animated button 45 --> <script type="text/javascript"> (function(d, src, c) { var t=d.scripts[d.scripts.length - 1],s=d.createElement('script');s.id='la_x2s6df8d';s.defer=true;s.src=src;s.onload=s.onreadystatechange=function(){var rs=this.readyState;if(rs&&(rs!='complete')&&(rs!='loaded')){return;}c(this);};t.parentElement.insertBefore(s,t.nextSibling);})(document, 'https://enterprisecomputinglimited.ladesk.com/scripts/track.js', function(e){ LiveAgent.createButton('cemw7rm0', e); }); </script> <!-- End of LiveAgent integration script -->
+
+</body>
+</html>
